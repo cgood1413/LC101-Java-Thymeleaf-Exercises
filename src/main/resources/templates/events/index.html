@@ -15,8 +15,8 @@
     </tr>
     </thead>
     <tr th:each="event : ${events}">
-        <td th:text="${event.getKey()}">Event Name</td>
-        <td th:text="${event.getValue()}">Event Description</td>
+        <td th:text="${event.name}">Event Name</td>
+        <td th:text="${event.description}">Event Description</td>
     </tr>
 </table>
 </body>

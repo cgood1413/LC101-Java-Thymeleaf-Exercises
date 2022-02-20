@@ -5,25 +5,51 @@
 
 <h1>Create Event</h1>
 <nav th:replace="fragments :: navigation"></nav>
+
 <form action="/events/create" method="post">
     <div class="form-group">
         <label>
             Event Name
-            <input type="text" name="name" class="form-control">
+            <input th:field="${event.name}" class="form-control">
         </label>
-    </div>
-    <div class="form-group">
-        <label>
-            Event Address
-            <input type="text" name="address" class="form-control">
-        </label>
+        <p class="error" th:errors="${event.name}"></p>
     </div>
     <div class="form-group">
         <label>
             Event Description
-            <textarea name="description" class="form-control"></textarea>
+            <textarea th:field="${event.description}" class="form-control"></textarea>
         </label>
+        <p class="error" th:errors="${event.description}"></p>
     </div>
+    <div class="form-group">
+        <label>
+            Event Address
+            <input th:field="${event.address}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.address}"></p>
+    </div>
+    <div class="form-group">
+        <label>
+            Event Contact Email
+            <input type="email" th:field="${event.contactEmail}" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
+    </div>
+    <div class="form-group">
+        <label>
+            Number of Attendees
+            <input type="number" th:field="${event.attendeeNum}" min="1" class="form-control">
+        </label>
+        <p class="error" th:errors="${event.attendeeNum}"></p>
+    </div>
+    <div class="form-group">
+        <label>
+            Registration Required?
+            <input type="checkbox" th:field="${event.registrationRequired}" th:value="${true}" >
+        </label>
+        <p class="error" th:errors="${event.registrationRequired}"></p>
+    </div>
+    <br>
     <div class="form-group">
         <input type="submit" value="Create Event" class="btn btn-success">
     </div>

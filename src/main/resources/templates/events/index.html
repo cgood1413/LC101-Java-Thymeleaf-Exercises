@@ -12,11 +12,19 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
+        <th>Address</th>
+        <th>Contact Email</th>
+        <th>Registered Attendees No.</th>
+        <th>Registration Required?</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
         <td th:text="${event.name}">Event Name</td>
         <td th:text="${event.description}">Event Description</td>
+        <td th:text="${event.address}">Event Address</td>
+        <td th:text="${event.contactEmail}">Event Contact Email</td>
+        <td th:text="${event.attendeeNum}">Event Attendee No.</td>
+        <td th:text="${event.registrationRequired}">Required Registration</td>
         <td>
             <button class="btn btn-primary"><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a></button>
         </td>

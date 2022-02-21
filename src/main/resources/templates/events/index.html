@@ -16,6 +16,7 @@
         <th>Contact Email</th>
         <th>Registered Attendees No.</th>
         <th>Registration Required?</th>
+        <th>Type</th>
     </tr>
     </thead>
     <tr th:each="event : ${events}">
@@ -25,6 +26,7 @@
         <td th:text="${event.contactEmail}">Event Contact Email</td>
         <td th:text="${event.attendeeNum}">Event Attendee No.</td>
         <td th:text="${event.registrationRequired}">Required Registration</td>
+        <td th:text="${event.type.displayName}">Event Type</td>
         <td>
             <button class="btn btn-primary"><a th:href="@{/events/edit/{id}(id=${event.id})}">Edit</a></button>
         </td>

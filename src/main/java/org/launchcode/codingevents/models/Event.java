@@ -30,17 +30,22 @@ public class Event {
     @NotNull(message = "Number of event attendees is required.")
     private int attendeeNum;
 
-    public Event(){}
+    private EventType type;
 
-    public Event(String name, String description, String contactEmail, String address, boolean registrationRequired, int attendeeNum) {
+    public Event(){
+        this.id = nextId;
+        nextId++;
+    }
+
+    public Event(String name, String description, String contactEmail, String address, boolean registrationRequired, int attendeeNum, EventType type) {
+        this();
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
         this.address = address;
         this.registrationRequired = registrationRequired;
         this.attendeeNum = attendeeNum;
-        this.id = nextId;
-        nextId++;
+        this.type = type;
     }
 
     public String getName() {
@@ -93,6 +98,14 @@ public class Event {
 
     public void setAttendeeNum(int attendeeNum) {
         this.attendeeNum = attendeeNum;
+    }
+
+    public EventType getType() {
+        return type;
+    }
+
+    public void setType(EventType type) {
+        this.type = type;
     }
 
     @Override

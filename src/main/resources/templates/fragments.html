@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Coding Events</title>
@@ -9,12 +9,15 @@
 
 </head>
 <body>
-<h1>Coding Events</h1>
-<nav th:fragment="navigation">
+
+<nav th:fragment="header">
+    <h1 th:text="${title}">Coding Events</h1>
     <ul class="nav">
         <li class="nav-item"><a class="nav-link" href="/events">All Events</a></li>
         <li class="nav-item"><a class="nav-link" href="/events/create">Create Event</a></li>
-        <li class="nav-item"><a class="nav-link" href="/events/delete">Delete Event</a></li>
+        <li class="nav-item"><a class="nav-link" href="/events/delete">Delete Events</a></li>
+        <li class="nav-item"><a class="nav-link" href="/event-categories">All Event Categories</a></li>
+        <li class="nav-item"><a class="nav-link" href="/event-categories/create">Create Event Category</a></li>
     </ul>
 </nav>
 

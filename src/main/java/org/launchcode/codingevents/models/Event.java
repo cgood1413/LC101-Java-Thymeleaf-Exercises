@@ -1,52 +1,41 @@
 package org.launchcode.codingevents.models;
 
-import javax.validation.constraints.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
+@Entity
 public class Event {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
-    @NotBlank(message = "Event name is required.")
-    @Size(min = 3, max = 50, message = "Description must be between 3 and 50 characters.")
+    @NotBlank(message = "Name is required")
+    @Size(min = 3, max = 50, message = "Name must be between 3 and 50 characters")
     private String name;
 
-    @Size(max = 500, message = "Description must be less than 500 characters.")
+    @Size(max = 500, message = "Description must be less than 500 characters!")
     private String description;
 
-    @Email(message = "Invalid Email.")
-    @NotBlank(message = "Contact email is required.")
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email. Try again.")
     private String contactEmail;
-
-    @Size(max = 500)
-    @NotBlank(message = "Event Address is required.")
-    private String address;
-
-    @AssertTrue(message = "Registration is required for all events")
-    private boolean registrationRequired;
-
-    @Positive(message = "Events must have at least one registered attendee")
-    @NotNull(message = "Number of event attendees is required.")
-    private int attendeeNum;
 
     private EventType type;
 
-    public Event(){
-        this.id = nextId;
-        nextId++;
-    }
-
-    public Event(String name, String description, String contactEmail, String address, boolean registrationRequired, int attendeeNum, EventType type) {
-        this();
+    public Event(String name, String description, String contactEmail, EventType type) {
         this.name = name;
         this.description = description;
         this.contactEmail = contactEmail;
-        this.address = address;
-        this.registrationRequired = registrationRequired;
-        this.attendeeNum = attendeeNum;
         this.type = type;
     }
+
+    public Event() {}
 
     public String getName() {
         return name;
@@ -64,18 +53,6 @@ public class Event {
         this.description = description;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public String getContactEmail() {
         return contactEmail;
     }
@@ -84,28 +61,21 @@ public class Event {
         this.contactEmail = contactEmail;
     }
 
-    public boolean isRegistrationRequired() {
-        return registrationRequired;
-    }
-
-    public void setRegistrationRequired(boolean registrationRequired) {
-        this.registrationRequired = registrationRequired;
-    }
-
-    public int getAttendeeNum() {
-        return attendeeNum;
-    }
-
-    public void setAttendeeNum(int attendeeNum) {
-        this.attendeeNum = attendeeNum;
-    }
-
     public EventType getType() {
         return type;
     }
 
     public void setType(EventType type) {
         this.type = type;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 
     @Override

@@ -30,19 +30,28 @@ public class EventController {
     private TagRepository tagRepository;
 
     @GetMapping
-    public String displayEvents(@RequestParam(required = false) Integer categoryId, Model model) {
-        if(categoryId == null){
+    public String displayEvents(@RequestParam(required = false) Integer categoryId, @RequestParam(required = false) Integer tagId, Model model) {
+        if (categoryId == null && tagId == null) {
             model.addAttribute("title", "All Events");
             model.addAttribute("events", eventRepository.findAll());
-            return "events/index";
-        }
-        Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
-        if (result.isEmpty()){
-            model.addAttribute("title", "Invalid Category ID: " + categoryId);
+        } else if (categoryId != null && tagId == null){
+            Optional<EventCategory> result = eventCategoryRepository.findById(categoryId);
+            if (result.isEmpty()) {
+                model.addAttribute("title", "Invalid Category ID: " + categoryId);
+            } else {
+                EventCategory category = result.get();
+                model.addAttribute("title", "Events in category: " + category.getName());
+                model.addAttribute("events", category.getEvents());
+            }
         } else {
-            EventCategory category = result.get();
-            model.addAttribute("title", "Events in Category: " + category.getName());
-            model.addAttribute("events", category.getEvents());
+            Optional<Tag> result = tagRepository.findById(tagId);
+            if(result.isEmpty()){
+                model.addAttribute("title", "Invalid Tag ID: " + tagId);
+            } else {
+                Tag tag = result.get();
+                model.addAttribute("title", "Events in tag: " + tag.getDisplayName());
+                model.addAttribute("events", tag.getEvents());
+            }
         }
         return "events/index";
     }
